@@ -43,16 +43,16 @@ If the model is stored we use it, if not we do a new fit. name should be unique 
 
 - Some precision on model
 
--sma :
+- sma :
 
 sma window is fixed now to 10, we can't infer yet the best window size...It will be done on the fit part later or passed as an input from the client.
 
-As with a window size of 10 we do a multi step time series forcasting, this model will be very bad id the future period to forcast is biffer than 10 as we will forget the trained model.
+As with a window size of 10 we do a multi step time series forcasting, this model will be very bad if the future period to forcast is biger than 10 as we will forget the trained model.
 
-Additionnaly to this, we do not yet add some pertinent transformation to improve the time series signal for forcasting (as log transformation, shifting).
+Additionnaly to this, we do not yet add some pertinent transformations to improve the time series signal for forcasting (as log transformation, shifting).....todo
 
-Seasonability, trend and holiday is not taken into account yet.
+Seasonability, trend and holiday is not taken into account yet. Input signal is considered stationary.
 
 
 -prophet :
-todo
+todo url as it's a well known lib very robust
