@@ -26,3 +26,22 @@ pip2 install statsmodels
   
 - Basic usage :
 
+import pipelineforcasting as pplprocess
+#Launch pipeline
+res = pplprocess.run_forcast(df,future_period, freq, name, model)
+
+  - future_period : number of value to forcaste
+  - frequency : daily : 'D', monthlu : 'M', yearly : 'Y'....according to the time series...This value is not yet infered
+  - name : model identifier
+  - model : model to use 'sma' or 'prophet'
+
+
+- Some precision on model
+-sma :
+sma window is fixed now to 10, we can't infer yet the best window size...It will be done on the fit part later or passed as an input from the client
+As with a window size of 10 we do a multi step time series forcasting, this model will be very bad id the future period to forcast is biffer than 10 as we will forget the trained model
+Additionnaly to this, we do not yet add some pertinent transformation to improve the time series signal for forcasting (as log transformation, shifting)
+Seasonability, trend and holiday is not taken into account yet
+
+-prophet :
+todo
