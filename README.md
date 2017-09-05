@@ -13,7 +13,7 @@ pip install jpdforcaster
 
 Currently :
 
-clone the repository and install some dependency :
+clone the repository and install some dependencies :
 
 ```bash
 pip install pandas
