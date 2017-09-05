@@ -105,16 +105,20 @@ res = pplprocess.run_forcast(dataAsDataFrame, future_period=10, freq='D', name="
 
 - sma window is fixed now to 10, we can't infer yet the best window size...It will be done on the fit part later or passed as an input from the client.
 
-- As with a window size of 10 we do a multi step time series forcasting, this model will be very bad if the future period to forcast is biger than 10 as we will forget the trained model.
+- As with a window size of 10 we do a multi step time series forcasting, this model will be very bad if the future period to forcast is bigger than 10 as we will forget the trained model.
 
 - Additionnaly to this, we do not yet add some pertinent transformations to improve the time series signal for forcasting (as log transformation, shifting).....todo
 
-- Seasonability, trend and holiday is not taken into account yet. Input signal is considered stationary.
+- Seasonability, trend and holiday is not taken into account yet. Input signal is considered stationary...Wich is not the case in the real life
+
+- This model could be use for basic forecasting to detect some singular event or to analyse  a trend or some up/down barrier
 
 
 #### prophet :
 
 - Prophet is a procedure for forecasting time series data. It is based on an additive model where non-linear trends are fit with yearly and weekly seasonality, plus holidays. It works best with daily periodicity data with at least one year of historical data. Prophet is robust to missing data, shifts in the trend, and large outliers.
+
+- Enought robust to use it for augmented machine learning
 
 ## Usefull link for forcasting
 
