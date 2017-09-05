@@ -5,6 +5,7 @@ import re
 from datetime import datetime
 from sklearn.metrics import mean_squared_error
 from math import sqrt
+import os.path
 
 def validate_time_series_struct(ts):
     """
@@ -134,3 +135,9 @@ def split_time_series_for_validation(ts, split_point, name = 'ts'):
     dataset.to_csv(name + '_dataset.csv')
     validation.to_csv(name + '_validation.csv')
     return dataset, validation
+
+"""
+Get file name in consitent way
+"""
+def get_path_file(relative_path):
+    return os.path.join(os.path.dirname(__file__), relative_path)

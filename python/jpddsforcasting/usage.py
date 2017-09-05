@@ -22,12 +22,11 @@ def do_and_plot_forcasting(df,future_period, freq, name, model):
     #Return the original time series and forecasting
     return res
 
-
 """
 Usage daily forcasting
 """
 
-data1 = pd.read_csv("dataset/jpdDataSetForForcasting-1.csv")
+data1 = pd.read_csv(tb.get_path_file("dataset/jpdDataSetForForcasting-1.csv"))
 df1 = pd.DataFrame()
 df1['ds'] = data1['ds']
 df1['y'] = data1['y']
@@ -41,7 +40,7 @@ fdata1prophet = do_and_plot_forcasting(df1,40, 'D', 'prophettestmodel-1', 'proph
 """
 Usage monthly forcasting
 """
-data2 = pd.read_csv("dataset/jpdDataSetForForcasting-2.csv")
+data2 = pd.read_csv(tb.get_path_file("dataset/jpdDataSetForForcasting-2.csv"))
 df2 = pd.DataFrame()
 df2['ds'] = data2['ds']
 df2['y'] = data2['y']
