@@ -1,5 +1,14 @@
-# jpdforcaster
-Time Series forcasting pipelines library - Use different market models to forcast time series data
+# JetPack Data jpdforcaster
+
+jpdforcaster is a time series forcasting pipelines libraries.
+Those libraries use different market models to forcast time series data and are based also on some research papers.
+Predictive module of jetPack Data platforme use those libraries
+
+## How to setup
+
+In near future :
+
+
 
 TODO :
 -- Add setup.y for piping
