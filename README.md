@@ -8,15 +8,15 @@ Predictive module of jetPack Data platforme use those libraries
 
 In near future use pip :
 
-,,,
+'''
 pip install jpdforcaster
-,,,
+'''
 
 Currently :
 
 clone the repository and install some dependency :
 
-,,,
+'''
 pip install pandas
 pip install sklearn
 pip install scipy
@@ -26,7 +26,7 @@ pip install fbprophet
 pip install pystan
 pip install fbprophet
 pip install statsmodels
-,,,
+'''
 
 
 
@@ -44,9 +44,9 @@ Documentation is under generation
 jpdforcaster/usage.py
 
 To see some results you can execute :
-,,,
+'''
 python usage.py
-,,,
+'''
 
 
 ## Some précision for current version
@@ -58,11 +58,11 @@ python usage.py
   
 > Basic usage :
 
-,,,
+'''
 import pipelineforcasting as pplprocess
 #Launch pipeline
 res = pplprocess.run_forcast(df,future_period, freq, name, model)
-,,,
+'''
 
 > If the model is stored we use it, if not we do a new fit. name should be unique (this behaviour will be improved)
 
