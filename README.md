@@ -7,16 +7,15 @@ Predictive module of jetPack Data platforme use those libraries
 ## How to setup
 
 In near future use pip :
-
-'''
+```bash
 pip install jpdforcaster
-'''
+```
 
 Currently :
 
 clone the repository and install some dependency :
 
-'''
+```bash
 pip install pandas
 pip install sklearn
 pip install scipy
@@ -26,7 +25,7 @@ pip install fbprophet
 pip install pystan
 pip install fbprophet
 pip install statsmodels
-'''
+```
 
 
 
@@ -34,9 +33,9 @@ pip install statsmodels
 ## How to test
 Some tests are implemented in jpdforcaster/tests
 
-'''
+```bash
 python test_toolbox.py
-'''
+```
 
 ## Get started
 
@@ -44,9 +43,10 @@ Documentation is under generation
 jpdforcaster/usage.py
 
 To see some results you can execute :
-'''
+
+```bash
 python usage.py
-'''
+```
 
 
 ## Some précision for current version
@@ -58,7 +58,7 @@ python usage.py
   
 > Basic usage :
 
-'''
+```python
 import pipelineforcasting as pplprocess
 #Launch pipeline
 res = pplprocess.run_forcast(df,future_period, freq, name, model)
