@@ -50,12 +50,12 @@ python usage.py
 ```
 
 
-## Some précision for current version
+## Some details on current version
 
-- We suppose inpout data without outlier as a pandas df with 2 columns ds and y
+- We suppose input data without outliers as a pandas df with 2 columns ds and y
 - We can use 2 models :
-  - Simple moving average with lag adjustment  (sma)
-  - Prophet (stan model curve fitting)  (prophet)
+  - Simple moving average with basic lag adjustment  ('sma')
+  - Prophet (stan model curve fitting)  ('prophet')
   
 > Basic usage :
 
