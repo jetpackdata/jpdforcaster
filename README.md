@@ -59,15 +59,38 @@ python usage.py
   
 > Basic usage :
 
+As input : a pandas data frame as follow :
+
+dataAsDataFrame :
+```
+ds,y
+2012-05-01,28.23
+2012-05-02,18.23
+2012-05-03,32.23
+2012-05-04,38.23
+2012-05-05,45.23
+2012-05-06,50.03
+2012-05-07,38.23
+2012-05-08,39.03
+2012-05-09,8.23
+2012-05-10,9.03
+2012-05-11,15.23
+2012-05-12,32.03
+2012-05-13,25.03
+2012-05-14,34.03
+```
+
+dataAsDataFrame should be clean with the right frequency :
+
 ```python
 import pipelineforcasting as pplprocess
 #Launch pipeline
-res = pplprocess.run_forcast(df,future_period, freq, name, model)
-'''
+res = pplprocess.run_forcast(dataAsDataFrame, future_period=10, freq='D', name="myYearlySalesRevenues", "sma")
+```
 
 > If the model is stored we use it, if not we do a new fit. name should be unique (this behaviour will be improved)
 
-  - future_period : number of value to forcaste
+  - future_period : number of value to forcast
   
   - frequency : daily : 'D', monthly : 'M', yearly : 'Y'....according to the time series...This value is not yet infered
   
