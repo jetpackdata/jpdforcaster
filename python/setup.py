@@ -3,7 +3,7 @@ from distutils.core import setup
 setup(
   name = 'jpddsforcasting',
   packages = ['jpddsforcasting'], 
-  version = '0.1.5',
+  version = '0.1.6',
   description = 'Time Series forcasting pipelines library - Use different market models to forcast time series data',
   author = 'Alaoui Mohamed',
   author_email = 'alaoui.simo@gmail.com',
@@ -12,5 +12,4 @@ setup(
   keywords = ['time series', 'forecasting', 'prophet', 'homology', 'machine learning'],
   classifiers = [],
   install_requires=['sklearn','scipy','fbprophet'],
-  package_data={'dataset':['*']},
 )
