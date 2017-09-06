@@ -1,11 +1,5 @@
 #documentation
-recursive-include dataset *
-
-#data used for clustering
-
-#phonetic representation
 
 #example files
+recursive-include jpddsforcasting/dataset *
 
-
-#Misc
