@@ -7,6 +7,8 @@ from sklearn.metrics import mean_squared_error
 from math import sqrt
 import os.path
 
+default_conf = {"runtime_file_relative_path" : "/prickl_files/"}
+
 def validate_time_series_struct(ts):
     """
         Parameters
@@ -141,3 +143,9 @@ Get file name in consitent way
 """
 def get_path_file(relative_path):
     return os.path.join(os.path.dirname(__file__), relative_path)
+
+"""
+Get a default configuration
+"""
+def get_conf(key):
+    return default_conf[key]
