@@ -7,32 +7,13 @@ Predictive module of jetPack Data platforme use those libraries : https://www.je
 
 ## How to setup
 
-In near future use pip :
 ```bash
 pip install jpdforcaster
 ```
 
-Currently :
-
-clone the repository and install some dependencies :
-
-```bash
-pip install pandas
-pip install sklearn
-pip install scipy
-pip install numpy
-pip install cython
-pip install fbprophet
-pip install pystan
-pip install fbprophet
-pip install statsmodels
-```
-
-
-
 
 ## How to test
-Some tests are implemented in jpdforcaster/tests
+Some tests are implemented in jpddsforcasting/tests
 
 ```bash
 python test_toolbox.py
@@ -41,12 +22,12 @@ python test_toolbox.py
 ## Get started
 
 Documentation is under generation
-jpdforcaster/usage.py
 
-To see some results you can execute :
+
+To see some results you can import :
 
 ```bash
-python usage.py
+import jpddsforcasting.usage
 ```
 
 
