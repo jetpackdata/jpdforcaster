@@ -5,15 +5,22 @@ Those libraries use different market models to forcast time series data and are 
 
 Predictive module of jetPack Data platforme use those libraries : https://www.jetpackdata.com
 
+## New Release 0.1.10
+```bash
+pip install jpddsforcasting --upgrade
+```
+- Make the lib work with python3
+
 ## How to setup
 
 ```bash
-pip install jpdforcaster
+pip install jpddsforcasting
 ```
 
 ## Get started
 
 Documentation is under generation :
+
 
 ## Quick usage
 
@@ -23,6 +30,12 @@ To see some results :
 python -m jpddsforcasting
 ```
 A window will appear with some forcasting.
+
+Clean your temporary directory :
+
+```bash
+python -m jpddsforcasting clean
+```
 
 
 ## Some details on current version
