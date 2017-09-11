@@ -1,6 +1,7 @@
-from sma import Sma
 from fbprophet import Prophet
 import logging
+
+from jpddsforcasting.sma import Sma
 
 logger = logging.getLogger(__name__)
 

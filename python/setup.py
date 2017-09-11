@@ -12,4 +12,8 @@ setup(
   keywords = ['time series', 'forecasting', 'prophet', 'homology', 'machine learning'],
   classifiers = [],
   install_requires=['sklearn','scipy','fbprophet'],
+  #Show usage properly
+  entry_points={
+    'console_scripts': ['jpddsforcasting = jpddsforcasting.usage:main'],
+  },
 )

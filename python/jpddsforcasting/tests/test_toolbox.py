@@ -2,10 +2,7 @@ from unittest import TestCase
 import unittest as ut
 import pandas as pd
 
-#use nose intead to avoid adding this relative path
-import sys
-sys.path.append('../')
-import toolbox as tb
+import jpddsforcasting.toolbox as tb
 
 try:
     from StringIO import StringIO

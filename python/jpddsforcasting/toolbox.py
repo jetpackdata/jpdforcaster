@@ -6,6 +6,12 @@ from datetime import datetime
 from sklearn.metrics import mean_squared_error
 from math import sqrt
 import os.path
+from os import path, chdir
+import tempfile
+import glob
+import logging
+
+logger = logging.getLogger(__name__)
 
 default_conf = {"runtime_file_relative_path" : "/prickl_files/"}
 
@@ -92,9 +98,11 @@ def get_model_ref_name(ref_prefix, dir_path):
     r = re.compile(ref_prefix+".*")
     model_list = filter(r.match, listeFichiers)
     if model_list is not None:
-        if not not(model_list):
+        if model_list:
             model_list = sorted(model_list,reverse=True)
-            file_modelname = model_list[0]
+            if len(model_list) != 0:
+                file_modelname = model_list[0]
+                logger.info("Model to use : %s" %file_modelname)
                            
     return file_modelname
 
@@ -111,6 +119,9 @@ def nrmse_evaluation(test, predictions):
 
 def rmse_evaluation(test, predictions):
     return sqrt(mean_squared_error(test, predictions))
+
+def cv_rmse_evaluation(test,prediction):
+    return sqrt(mean_squared_error(test, predictions))/prediction.mean()
 
 def split_for_model_selection(ts,rate = 0.50):
     train_size = int(len(ts)*rate)
@@ -149,3 +160,12 @@ Get a default configuration
 """
 def get_conf(key):
     return default_conf[key]
+
+"""
+Clean pickled model
+"""
+def clean_stored_model():
+    files=glob.glob(os.path.join(tempfile.gettempdir(),'*.pkl'))
+    for filename in files:
+        os.remove(filename)
+        

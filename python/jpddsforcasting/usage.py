@@ -1,8 +1,12 @@
-import pipelineforcasting as pplprocess
-import toolbox as tb
 import pandas as pd
-
 import matplotlib.pyplot as plt
+import sys
+import logging
+
+import jpddsforcasting.pipelineforcasting as pplprocess
+import jpddsforcasting.toolbox as tb
+
+logger = logging.getLogger(__name__)
 
 
 def do_and_plot_forcasting(df,future_period, freq, name, model):
@@ -22,30 +26,35 @@ def do_and_plot_forcasting(df,future_period, freq, name, model):
     #Return the original time series and forecasting
     return res
 
-"""
-Usage daily forcasting
-"""
-
-data1 = pd.read_csv(tb.get_path_file("dataset/jpdDataSetForForcasting-1.csv"))
-df1 = pd.DataFrame()
-df1['ds'] = data1['ds']
-df1['y'] = data1['y']
-
-fdata1sma = do_and_plot_forcasting(df1,40, 'D', 'smatestmodel-1', 'sma')
-
-fdata1prophet = do_and_plot_forcasting(df1,40, 'D', 'prophettestmodel-1', 'prophet')
 
 
 
-"""
-Usage monthly forcasting
-"""
-data2 = pd.read_csv(tb.get_path_file("dataset/jpdDataSetForForcasting-2.csv"))
-df2 = pd.DataFrame()
-df2['ds'] = data2['ds']
-df2['y'] = data2['y']
+def main():
+    # if with clean
+    if len(sys.argv) > 1:
+        if sys.argv[1] == 'clean':
+            print("Clean all existing model")
+            tb.clean_stored_model()
+        else:
+            logger.info("Usage without args or clean")
+    elif len(sys.argv) == 1:
+        #Usage daily forcasting
+        data1 = pd.read_csv(tb.get_path_file("dataset/jpdDataSetForForcasting-1.csv"))
+        df1 = pd.DataFrame()
+        df1['ds'] = data1['ds']
+        df1['y'] = data1['y']
 
-fdata2sma = do_and_plot_forcasting(df2, 12, 'M', 'smatestmodel-2', 'sma')
+        fdata1sma = do_and_plot_forcasting(df1,40, 'D', 'smatestmodel-1', 'sma')
 
-fdata2prophet = do_and_plot_forcasting(df2,12, 'M', 'prophettestmodel-2', 'prophet')
+        fdata1prophet = do_and_plot_forcasting(df1,40, 'D', 'prophettestmodel-1', 'prophet')
+
+        #Usage monthly forcasting
+        data2 = pd.read_csv(tb.get_path_file("dataset/jpdDataSetForForcasting-2.csv"))
+        df2 = pd.DataFrame()
+        df2['ds'] = data2['ds']
+        df2['y'] = data2['y']
+
+        fdata2sma = do_and_plot_forcasting(df2, 12, 'M', 'smatestmodel-2', 'sma')
+
+        fdata2prophet = do_and_plot_forcasting(df2,12, 'M', 'prophettestmodel-2', 'prophet')
 
