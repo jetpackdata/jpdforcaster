@@ -11,24 +11,18 @@ Predictive module of jetPack Data platforme use those libraries : https://www.je
 pip install jpdforcaster
 ```
 
-
-## How to test
-Some tests are implemented in jpddsforcasting/tests
-
-```bash
-python test_toolbox.py
-```
-
 ## Get started
 
-Documentation is under generation
+Documentation is under generation :
 
+## Quick usage
 
-To see some results you can import :
+To see some results :
 
 ```bash
-import jpddsforcasting.usage
+python -m jpddsforcasting
 ```
+A window will appear with some forcasting.
 
 
 ## Some details on current version
