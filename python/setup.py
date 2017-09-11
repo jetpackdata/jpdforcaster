@@ -3,7 +3,7 @@ from distutils.core import setup
 setup(
   name = 'jpddsforcasting',
   packages = ['jpddsforcasting'], 
-  version = '0.1.8',
+  version = '0.1.9',
   description = 'Time Series forcasting pipelines library - Use different market models to forcast time series data',
   author = 'Alaoui Mohamed',
   author_email = 'alaoui.simo@gmail.com',
