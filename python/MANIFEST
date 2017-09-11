@@ -2,6 +2,7 @@
 setup.cfg
 setup.py
 jpddsforcasting/__init__.py
+jpddsforcasting/__main__.py
 jpddsforcasting/modelfactory.py
 jpddsforcasting/pipelineforcasting.py
 jpddsforcasting/sma.py
