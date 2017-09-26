@@ -3,10 +3,14 @@ setup.cfg
 setup.py
 jpddsforcasting/__init__.py
 jpddsforcasting/__main__.py
+jpddsforcasting/datatransformer.py
+jpddsforcasting/ewma.py
+jpddsforcasting/modelconfig.py
 jpddsforcasting/modelfactory.py
 jpddsforcasting/pipelineforcasting.py
 jpddsforcasting/sma.py
 jpddsforcasting/toolbox.py
 jpddsforcasting/usage.py
+jpddsforcasting/dataset/HistoricalQuotesNASDACQ.csv
 jpddsforcasting/dataset/jpdDataSetForForcasting-1.csv
 jpddsforcasting/dataset/jpdDataSetForForcasting-2.csv

@@ -4,7 +4,7 @@ setup(
   name = 'jpddsforcasting',
   packages = ['jpddsforcasting'], 
   package_data={'jpddsforcasting': ['dataset/*.csv']},
-  version = '0.1.10',
+  version = '0.1.11',
   description = 'Time Series forcasting pipelines library - Use different market models to forcast time series data',
   author = 'Alaoui Mohamed',
   author_email = 'alaoui.simo@gmail.com',
