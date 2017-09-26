@@ -6,25 +6,37 @@ import math
 import jpddsforcasting.toolbox as tb
 
 
+
 logger = logging.getLogger(__name__)
 
 
 class Sma(object):
+
+    config_schema = ['window_size']
+
+    #default
+    sma_config = None
+    window_size = 10
+
     
-    def __init__(self, windows_size = 1, 
-                 full_history=None):
-        self.windows_size = windows_size
+    def __init__(self, sma_config, full_history = None):
+
+        self.sma_config = sma_config
+        self.sma_config.add_specific_schema(self.config_schema)
+        self.sma_config.m_config_validator()
+
         self.full_history = full_history
+        self.window_size = self.sma_config.m_config['window_size']
+
         
     def fit(self, df):
-        logger.info("Je suis un fitter et la fenetre est : %s" % self.windows_size) 
+        
         ts = tb.validate_time_series_struct(df)
         self.full_history = ts
-        logger.info("Time Series have the right structure")
-        
-        #Look for best windows -- to do later -- let assume it's 10
-        #We suppose at the first time as full_history is the estimationSet
-        self.windows_size = 10
+    
+        logger.info("Je suis un fitter et la fenetre est : %s" % self.window_size) 
+
+        #Look for best windows 
         
         return self
         
@@ -32,39 +44,52 @@ class Sma(object):
     def predict(self, df):
         
         logger.info('Do the forecast on the future')                     
-        df['yhat'] = self.__compute_the_future(df)
+        df['yhat'], variance_coeff = self.__compute_the_future(df)
+        df['yhat_upper'] = df['yhat'].apply(lambda x : x + variance_coeff*x)
+        df['yhat_lower'] = df['yhat'].apply(lambda x : x - variance_coeff*x)
+
         
+        df = df.join(self.full_history[['trend','seasonal']], how='outer')
+                
         return df
-    
-    
+
+
     def __compute_the_future(self, df_with_future):
-        
-        first_window = self.full_history['y']
-        df_with_future = pd.concat((df_with_future,first_window),axis=1)
-            
-        iterator = range(len(df_with_future)-self.windows_size)
-        
-        temp_prediction = np.array(first_window[:self.windows_size])
-        predictions = np.array(first_window[:self.windows_size])
-        history_with_future = np.array(first_window[:self.windows_size])
-            
-        for i in iterator:
-            yhat_with_lag = np.mean(history_with_future[-self.windows_size:])  
-            temp_prediction = np.append(temp_prediction,yhat_with_lag)
-            
-            obs = df_with_future['y'][i]
-            if math.isnan(obs) :
-                obs = yhat_with_lag  
-            history_with_future = np.append(history_with_future,obs)
-            
-            yhat_unlag = np.mean(temp_prediction[-self.windows_size:]) 
-            
-            diff = yhat_with_lag - yhat_unlag
-            
-            yhat = yhat_with_lag + diff
-            
-            predictions = np.append(predictions,yhat)        
-            
-            
-        return predictions
     
+        
+        df_with_future = df_with_future.join(self.full_history[['y']], how='outer')
+        max_history_date = self.full_history.ds.max()
+
+        fwd_predictions = pd.Series(self.full_history.y).rolling(window=self.window_size,center=False).mean() # take sma in fwd direction
+        bwd_predictions = pd.Series(self.full_history.y[::-1]).rolling(window=self.window_size,center=False).mean() # take sma in bwd direction
+        fwd_predictions = fwd_predictions.fillna(method='bfill')
+        bwd_predictions = bwd_predictions.fillna(method='bfill')
+
+        filtered = np.vstack(( fwd_predictions, bwd_predictions[::-1])) # lump fwd and bwd together
+        predictions = np.mean(filtered, axis=0 ) # average them
+
+        is_to_forcast = (df_with_future.ds > max_history_date)
+
+        iterator = range(len(is_to_forcast))
+
+        temp = self.full_history.y[-self.window_size:]
+        
+        for i in iterator:
+            if is_to_forcast[i]:
+                yhat_fwd = pd.Series(temp[-self.window_size:]).rolling(window=self.window_size,center=False).mean()
+                yhat_bwd = pd.Series(temp[-self.window_size:][::-1]).rolling(window=self.window_size,center=False).mean()
+                
+                yhat_fwd = yhat_fwd.fillna(method='bfill')
+                yhat_bwd = yhat_bwd.fillna(method='bfill')
+                
+
+                yhat = np.mean(np.vstack(( yhat_fwd, yhat_bwd[::-1])),axis=0)[-1:]
+                  
+                temp = np.append(temp, yhat) # Recursive Multi-step Forecast
+
+                predictions = np.append(predictions, yhat)
+        
+        var_coef = tb.cv_rmse_evaluation(self.full_history.y,predictions[:len(self.full_history.y)])
+
+        return predictions, var_coef
+

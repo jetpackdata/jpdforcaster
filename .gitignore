@@ -3,3 +3,13 @@ python/jpddsforcasting/*.pyc
 
 python/jpddsforcasting/*.pkl
 python/jpddsforcasting/__pycache__/*
+.cache/v/cache/lastfailed
+.vscode/tasks.json
+.vscode/launch.json
+.vscode/settings.json
+python/jpddsforcasting/.DS_Store
+python/jpddsforcasting/tests/__init__.pyc
+python/jpddsforcasting/tests/test_toolbox.pyc
+python/jpddsforcasting/tests/__pycache__/__init__.cpython-36.pyc
+python/jpddsforcasting/tests/__pycache__/test_toolbox.cpython-36-PYTEST.pyc
+python/jpddsforcasting/tests/__pycache__/test_toolbox.cpython-36.pyc

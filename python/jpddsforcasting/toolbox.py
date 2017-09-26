@@ -10,6 +10,7 @@ from os import path, chdir
 import tempfile
 import glob
 import logging
+import hashlib
 
 logger = logging.getLogger(__name__)
 
@@ -24,13 +25,43 @@ def validate_time_series_struct(ts):
         -------
         
         """
-    if ts.columns.size != 2:
-        raise ValueError("Data Frame size must be equal to 2 and have ds (datetime) and y (numeric) column")
+    if ('ds' not in ts) or ('y' not in ts):
+        raise ValueError("Data Frame must have ds (datetime) and y (numeric) column")
         
     if 'ds' in ts:
         ts['ds'] = pd.to_datetime(ts['ds'])
     if 'y' in ts:
         ts['y'] = pd.to_numeric(ts['y'])       
+        
+    if ts['ds'].isnull().any():
+        raise ValueError('Found NaN in column ds.')
+
+    ts = ts.sort_values('ds')
+    ts.reset_index(inplace=True, drop=True)
+
+    if 'trend' not in ts:
+        ts['trend'] = pd.Series(np.zeros(len(ts.ds)))
+    
+    if 'seasonal' not in ts:
+        ts['seasonal'] = pd.Series(np.zeros(len(ts.ds)))
+    
+    return ts
+
+
+def validate_time_series_date(ts):
+    """
+        Parameters
+        ----------
+    
+        Returns
+        -------
+        
+        """
+    if ('ds' not in ts):
+        raise ValueError("Data Frame must have ds (datetime)")
+        
+    if 'ds' in ts:
+        ts['ds'] = pd.to_datetime(ts['ds'])    
         
     if ts['ds'].isnull().any():
         raise ValueError('Found NaN in column ds.')
@@ -120,8 +151,8 @@ def nrmse_evaluation(test, predictions):
 def rmse_evaluation(test, predictions):
     return sqrt(mean_squared_error(test, predictions))
 
-def cv_rmse_evaluation(test,prediction):
-    return sqrt(mean_squared_error(test, predictions))/prediction.mean()
+def cv_rmse_evaluation(test, predictions):
+    return sqrt(mean_squared_error(test, predictions))/predictions.mean()
 
 def split_for_model_selection(ts,rate = 0.50):
     train_size = int(len(ts)*rate)
@@ -168,4 +199,18 @@ def clean_stored_model():
     files=glob.glob(os.path.join(tempfile.gettempdir(),'*.pkl'))
     for filename in files:
         os.remove(filename)
+
+
+"""
+m_config = {
+        'model' : None,
+        'date' : None,
+        'id_model' : None,
+    }
+"""
+def compute_model_id_hash(config):
+    idmodstr = config['id_model']+config['model']
+    hash_object = hashlib.sha1(bytes(idmodstr.encode('utf-8')))
+    return hash_object.hexdigest()
+
         

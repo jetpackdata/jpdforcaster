@@ -8,6 +8,5 @@ jpddsforcasting/pipelineforcasting.py
 jpddsforcasting/sma.py
 jpddsforcasting/toolbox.py
 jpddsforcasting/usage.py
-jpddsforcasting/dataset/__init__.py
 jpddsforcasting/dataset/jpdDataSetForForcasting-1.csv
 jpddsforcasting/dataset/jpdDataSetForForcasting-2.csv
