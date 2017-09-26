@@ -16,8 +16,5 @@ setup(
   entry_points={
     'console_scripts': ['jpddsforcasting = jpddsforcasting.usage:main'],
   },
-  classifiers=[
-          'Programming Language :: Python 2.7',
-          'Programming Language :: Python 3',
-          ],
+  classifiers=[],
 )
