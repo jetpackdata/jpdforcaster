@@ -11,7 +11,6 @@ setup(
   url = 'https://github.com/jetpackdata/jpdforcaster/tree/master/python/jpddsforcasting',
   download_url = 'https://github.com/jetpackdata/jpdforcaster/archive/0.1.zip',
   keywords = ['time series', 'forecasting', 'prophet', 'homology', 'machine learning'],
-  classifiers = [],
   install_requires=['sklearn','scipy','fbprophet'],
   #Show usage properly
   entry_points={
