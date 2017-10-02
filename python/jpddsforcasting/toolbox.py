@@ -38,12 +38,6 @@ def validate_time_series_struct(ts):
 
     ts = ts.sort_values('ds')
     ts.reset_index(inplace=True, drop=True)
-
-    if 'trend' not in ts:
-        ts['trend'] = pd.Series(np.zeros(len(ts.ds)))
-    
-    if 'seasonal' not in ts:
-        ts['seasonal'] = pd.Series(np.zeros(len(ts.ds)))
     
     return ts
 

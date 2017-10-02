@@ -3,13 +3,15 @@ import logging
 
 from jpddsforcasting.sma import Sma
 from jpddsforcasting.ewma import Ewma
+from jpddsforcasting.arima import Arima
+
 from jpddsforcasting.modelconfig import ModelConfig
 
 logger = logging.getLogger(__name__)
 
 class Modelfactory(object):
     
-    registred_model = ["sma","prophet","ewma"]
+    registred_model = ["sma","prophet","ewma","arima"]
     
     def __init__(self):
         pass
@@ -29,6 +31,8 @@ class Modelfactory(object):
                 model_fit = Prophet()
             if model_name == 'ewma':
                 model_fit = Ewma(conf)
+            if model_name == 'arima':
+                model_fit = Arima(conf)
         else:
             error_message = model_name + " is not yet registred"
             logger.error(error_message)

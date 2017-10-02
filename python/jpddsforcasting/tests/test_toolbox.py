@@ -50,16 +50,6 @@ class TestToolbox(TestCase):
         hashconf = tb.compute_model_id_hash(config_for_hash)
         self.assertEqual(hashconf,hashref)
 
-    def test_prepare_back(self):
-        #Assume the identity as trained model
-        ts = dtt.prepare(DATA_TRANS, None)
-        ts['yhat'] = ts.y
-        ts['yhat_upper'] = 0
-        ts['yhat_lower'] = 0
-        ts = dtt.back_to_origin(ts)
-        print(ts)
-        self.assertEqual(ts.y_orig.any(),ts.yhat.any())
-
     def test_autocorrelation(self):
         ts = real_data
         autoC = dtt.autocorrelation(ts)

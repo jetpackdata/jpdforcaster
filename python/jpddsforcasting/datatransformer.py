@@ -15,16 +15,13 @@ import jpddsforcasting.toolbox as tb
 def prepare(time_series, configuration):
     
     ts = tb.validate_time_series_struct(time_series)
-    
     ts = __variance_stabilizator(ts)
     #ts = __decomposition(ts)
     return ts
 
-def back_to_origin(time_series):
-    
-    #ts = __inverse_decomposition(time_series)
-    ts = __inverse_variance_stabilizator(time_series)   
-
+def back_to_origin(time_series): 
+    #ts = __inverse_decomposition(time_series)   
+    ts = __inverse_variance_stabilizator(time_series) 
     ts = tb.validate_time_series_date(time_series)
     return ts
 
@@ -43,6 +40,7 @@ def __inverse_variance_stabilizator(time_series):
     Assume a data frame with a yhat prediction with lower/ipper value
     """
     time_series['yhat'] = np.exp(time_series.yhat) - 1
+
     time_series['yhat_lower'] = np.exp(time_series.yhat_lower) - 1
     time_series['yhat_upper'] = np.exp(time_series.yhat_upper) - 1
     return time_series
@@ -70,9 +68,9 @@ def __decomposition(time_series):
 
 def __inverse_decomposition(time_series):
     """
-    Back to rigine 
+    Back to origine 
     """
-    time_series['yhat'] = time_series['yhat'] + time_series['trend'] + time_series['seasonal']
+    time_series['yhat'] = time_series['yhat']#*time_series['seasonal'] + time_series['trend']
     
     return time_series
 

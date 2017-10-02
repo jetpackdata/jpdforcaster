@@ -10,10 +10,10 @@ import jpddsforcasting.toolbox as tb
 logger = logging.getLogger(__name__)
 
 
-def do_and_plot_forcasting(df, future_period, freq, config):
+def do_and_plot_forcasting(df, config):
 
     # Launch pipeline
-    forecast_data = pplprocess.run_forcast(df, future_period, freq, config)
+    forecast_data = pplprocess.run_forcast(df, config)
 
     # Prepare viz data
     viz_df = forecast_data[['yhat', 'yhat_lower',
@@ -95,6 +95,7 @@ def main():
             'model' : 'sma',
             'date' : tb.get_now(),
             'window_size' : 3,
+            'prediction_conf': {'future_period':24,'freq':'M'},
             'tech_conf': {'clean': True} 
             }
         
@@ -102,6 +103,7 @@ def main():
             'id_model' : 'prophettestmodel-1',
             'model' : 'prophet',
             'date' : tb.get_now(),
+            'prediction_conf': {'future_period':24,'freq':'M'},
             'tech_conf': {'clean': True}
             } 
             
@@ -109,7 +111,8 @@ def main():
             'id_model' : 'ewmatestmodel-1',
             'model' : 'sma',
             'date' : tb.get_now(),
-            'window_size' : 3,
+            'window_size' : 6,
+            'prediction_conf': {'future_period':24,'freq':'M'},
             'tech_conf': {'clean': True} 
             }
 
@@ -118,6 +121,7 @@ def main():
             'model': 'sma',
             'date': tb.get_now(),
             'window_size': 3,
+            'prediction_conf': {'future_period':24,'freq':'M'},
             'tech_conf': {'clean': True}
         }
     
@@ -125,6 +129,7 @@ def main():
             'id_model': 'prophettestmodel-2',
             'model': 'prophet',
             'date': tb.get_now(),
+            'prediction_conf': {'future_period':24,'freq':'M'},
             'tech_conf': {'clean': True}
         }
             
@@ -132,10 +137,19 @@ def main():
             'id_model': 'ewmatestmodel-2',
             'model': 'ewma',
             'date': tb.get_now(),
-            'window_size': 6,
+            'window_size': 3,
+            'prediction_conf': {'future_period':24,'freq':'M'},
             'tech_conf': {'clean': True}
         }
 
-        res2prophet = do_and_plot_forcasting(df2, 24, 'M', conf2sma)
-        res2sma = do_and_plot_forcasting(df2, 24, 'M', conf1prophet)
-        res1prophet = do_and_plot_forcasting(df2, 24, 'M', conf1ewma)
+        confarima = {
+            'id_model': 'arimatestmodel-2',
+            'model': 'arima',
+            'date': tb.get_now(),
+            'prediction_conf': {'future_period':24,'freq':'M'},
+            'tech_conf': {'clean': True}
+        }
+
+        #res1 = do_and_plot_forcasting(df2, conf2sma)
+        res2 = do_and_plot_forcasting(df2, conf2ewma)
+        #res3 = do_and_plot_forcasting(df2, conf2prophet)
