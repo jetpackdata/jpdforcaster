@@ -50,6 +50,7 @@ python -m jpddsforcasting clean
 As input : a pandas data frame as follow :
 
 dataAsDataFrame :
+ts
 ```
 ds,y
 2012-05-01,28.23
@@ -72,6 +73,16 @@ dataAsDataFrame should be clean with the right frequency :
 
 ```python
 import pipelineforcasting as pplprocess
+
+config = {
+            'id_model': 'my_ewma_for_sales_revenue',
+            'model': 'ewma', #or 'sma' or 'prophet'
+            'date': tb.get_now(),
+            'window_size': 3, #for 'ewma' and 'sma'
+            'prediction_conf': {'future_period':24,'freq':'M'},
+            'tech_conf': {'clean': True}
+        }
+
 #Launch pipeline
 res = pplprocess.run_forcast(ts, config)
 ```
